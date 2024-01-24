@@ -14,14 +14,49 @@ variable "default_tags" {
   }
 }
 
-# Uncomment as needed
+variable "github_owner" {
+  type        = string
+  description = "Owner of the Github org"
+  default     = ""
+}
 
-# variable "HCP_CLIENT_ID" {
-#   type        = string
-#   description = "The OAuth2 Client ID for API operations."
-# }
+variable "iac_repo_template" {
+  type        = string
+  description = "Template to use for IAC repo creation"
+  default     = "terraform-generic-template"
+}
 
-# variable "HCP_CLIENT_SECRET" {
-#   type        = string
-#   description = "The OAuth2 Client Secret for API operations."
-# }
+variable "mgmt_ws_prefix" {
+  type        = string
+  description = "String to prefix the archetype name to give mgmt workspace and repo names"
+  default     = "nclz-mgmt"
+}
+
+variable "mgmt_ws_template_prefix" {
+  type        = string
+  description = "String to prefix the archetype name to give mgmt template repo name"
+  default     = "nocode-lz-mgmt-template"
+}
+
+variable "oauth_token_id" {
+  type        = string
+  description = "Oauth token ID used for associating workspace to VCS"
+  default     = ""
+}
+
+variable "tfc_organization" {
+  type        = string
+  description = "TFC organization"
+  default     = ""
+}
+
+variable "project_name" {
+  type        = string
+  description = "Name of the project to create a landing zone for"
+}
+
+variable "project_prefix" {
+  type        = string
+  description = "Prefix for the TFE project name within the nocode module"
+  default     = "nclz-project"
+}

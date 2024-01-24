@@ -1,72 +1,12 @@
-# terraform-generic-template
+# terraform-tfe-nocode-lz
 
 ## About
+A no-code module to create landing zone resources.
+The no-code workspace is the project LZ management workspace (service catalog model), meaning the LZ is very prescriptive, and fully controlled by the platform team. To support multiple LZ archetypes, create multiple versions of this module and publish as no-code modules to the private registry.
 
-<!-- DELETE THIS COMMENT AND UPDATE THE ABOUT SECTION TO FIT YOUR PROJECT -->
-
-This is a template repo acting as a boilerplate for new [Terraform](https://www.terraform.io/) configs.
-It contains a set of files that will help you keep the repo clean and well-documented.
-
-### How to use it
-
-The best way to use this template is by using the [GitHub CLI (gh)](https://cli.github.com/). It allows you to create a new Terraform config repository from this template, without leaving your terminal.
-
-The advantage over a classical `fork` is that the resulting repo has no relationship with the template repo, no *upstream* remote to clean.
-
-A simple example to create a new config as a private repo, and clone it locally:
-
-```SHELL
-gh repo create my-tf-config --template kral2/terraform-generic-template --private --clone
-```
-
-> [!IMPORTANT]
->
-> Do not forget to update your files to make this config yours!
->
-> - repo's documentation and license: `README.md`, `CHANGELOG.md`, and `LICENSE` files
-> - the *.tf files: `main.tf`, `providers.tf`, and `variables.tf`
-
-Finally, install your pre-commit hooks by running these commands:
-
-```SHELL
-pre-commit install
-pre-commit run -a
-```
-
-Now, commit your code as usual. You are good to go! :rocket:
-
-### Features
-
-#### repo housekeeping
-
-- .gitignore file tuned for Terraform
-- .gitattributes file to ensure uniform line ending
-- pre-commit hooks using the [pre-commit](https://pre-commit.com/) framework
-
-#### pre-commit hooks
-
-Before each commit, the following hooks will help to keep your repo clean and well-documented:
-
-- clear trailing whitespaces
-- terraform validate and terraform fmt
-- terraform docs to auto-generate config documentation (version requirements, providers, inputs, outputs)
-
-#### Terraform config files
-
-- `main.tf` defines the Terraform cli version and the Terraform state on Terraform Cloud
-- `providers.tf` is a boilerplate with featured providers
-- `variables.tf` is a boilerplate with utility variables and locals
-- `output.tf` is a placeholder file for your outputs
-
-### Requirements
-
-- [gh](https://cli.github.com/)
-- [pre-commit](https://pre-commit.com/)
-- [terraform-docs](https://github.com/terraform-docs/terraform-docs)
-- [terraform cli](https://www.terraform.io/downloads.html)
-- [copywrite](https://github.com/hashicorp/copywrite) (optional)
-
-## Terraform Configuration information
+No-code workspace to be placed in a project with varset including:
+- TFE_TOKEN - capable of creating projects and teams
+- GITHUB_TOKEN - capable of creating repos and webhooks
 
 <!-- BEGIN_TF_DOCS -->
 
@@ -74,7 +14,7 @@ Before each commit, the following hooks will help to keep your repo clean and we
 
 | Name | Version |
 |------|---------|
-| terraform | >= 1.5.0 |
+| terraform | >= 1.6.0 |
 
 ### Modules
 
@@ -82,13 +22,32 @@ No modules.
 
 ### Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [github_branch.extra_envs](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/branch) | resource |
+| [github_repository.iac](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository) | resource |
+| [tfe_project.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project) | resource |
+| [tfe_project_variable_set.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) | resource |
+| [tfe_team.team](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team) | resource |
+| [tfe_team_project_access.levels](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_project_access) | resource |
+| [tfe_variable.project_name](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable) | resource |
+| [tfe_variable_set.project](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set) | resource |
+| [tfe_workspace.extra_envs](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace) | resource |
+| [tfe_workspace.main](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace) | resource |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| default\_tags | a set of tags to watermark the resources you deployed with Terraform. | `map(string)` | <pre>{<br>  "owner": "cetin",<br>  "terraformed": "Do not edit manually."<br>}</pre> | no |
+| default\_tags | a set of tags to watermark the resources you deployed with Terraform. | `map(string)` | <pre>{<br>  "owner": "richard",<br>  "terraformed": "Do not edit manually."<br>}</pre> | no |
+| github\_owner | Owner of the Github org | `string` | `""` | no |
+| iac\_repo\_template | Template to use for IAC repo creation | `string` | `"terraform-generic-template"` | no |
+| mgmt\_ws\_prefix | String to prefix the archetype name to give mgmt workspace and repo names | `string` | `"nclz-mgmt"` | no |
+| mgmt\_ws\_template\_prefix | String to prefix the archetype name to give mgmt template repo name | `string` | `"nocode-lz-mgmt-template"` | no |
+| oauth\_token\_id | Oauth token ID used for associating workspace to VCS | `string` | `""` | no |
+| project\_name | Name of the project to create a landing zone for | `string` | n/a | yes |
+| project\_prefix | Prefix for the TFE project name within the nocode module | `string` | `"nclz-project"` | no |
+| tfc\_organization | TFC organization | `string` | `""` | no |
 
 ### Outputs
 
