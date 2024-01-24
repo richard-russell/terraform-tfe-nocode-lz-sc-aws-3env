@@ -26,15 +26,14 @@ variable "iac_repo_template" {
   default     = "terraform-generic-template"
 }
 
+variable "envs" {
+  type        = string
+  description = "Comma-separated list of environments needing workspaces and branches. Last one maps to main branch."
+}
+
 variable "oauth_token_id" {
   type        = string
   description = "Oauth token ID used for associating workspace to VCS"
-  default     = ""
-}
-
-variable "tfc_organization" {
-  type        = string
-  description = "TFC organization"
   default     = ""
 }
 
@@ -48,3 +47,10 @@ variable "project_prefix" {
   description = "Prefix for the TFE project name within the nocode module"
   default     = "nclz-project"
 }
+
+variable "tfc_organization" {
+  type        = string
+  description = "TFC organization"
+  default     = ""
+}
+

@@ -40,6 +40,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | default\_tags | a set of tags to watermark the resources you deployed with Terraform. | `map(string)` | <pre>{<br>  "owner": "richard",<br>  "terraformed": "Do not edit manually."<br>}</pre> | no |
+| envs | Comma-separated list of environments needing workspaces and branches. Last one maps to main branch. | `string` | n/a | yes |
 | github\_owner | Owner of the Github org | `string` | `""` | no |
 | iac\_repo\_template | Template to use for IAC repo creation | `string` | `"terraform-generic-template"` | no |
 | oauth\_token\_id | Oauth token ID used for associating workspace to VCS | `string` | `""` | no |

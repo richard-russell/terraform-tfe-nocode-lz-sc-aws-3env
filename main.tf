@@ -11,15 +11,14 @@ terraform {
 provider "github" {}
 provider "tfe" {}
 
-# locals used as inputs to this lz archetype - change as needed
 locals {
+  envs     = [for env in split(",", var.envs) : trimspace(env)]
+  num_envs = length(local.envs)
+
   # environment/workspace mapped to main branch
-  main_env = "prod"
+  main_env = local.envs[local.num_envs - 1]
   # list of extra environments needing workspaces and branches
-  extra_envs = [
-    "dev",
-    "test"
-  ]
+  extra_envs = slice(local.envs, 0, local.num_envs - 1)
 }
 
 locals {
