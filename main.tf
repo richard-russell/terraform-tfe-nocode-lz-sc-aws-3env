@@ -27,6 +27,12 @@ locals {
   teams            = toset(["admin", "write", "maintain", "read"])
 }
 
+# AWS resources - not included in the demo, but typically:
+# - AWS account for project
+# - OIDC connection for dynamic provider credentials/workload identity
+# - roles and policies for DPC
+# - add these as env vars to project variable set
+
 resource "tfe_project" "this" {
   organization = var.tfc_organization
   name         = local.project_fullname

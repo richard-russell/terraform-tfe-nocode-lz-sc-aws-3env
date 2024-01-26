@@ -1,12 +1,15 @@
-# terraform-tfe-nocode-lz
+# terraform-tfe-nocode-lz-sc-aws-basic
 
 ## About
 A no-code module to create landing zone resources.
-The no-code workspace is the project LZ management workspace (service catalog model), meaning the LZ is very prescriptive, and fully controlled by the platform team. To support multiple LZ archetypes, create multiple versions of this module and publish as no-code modules to the private registry.
+The no-code workspace is the project LZ management workspace (service catalog model), meaning the LZ is very prescriptive, and fully controlled by the platform team. To support multiple LZ archetypes, create multiple versions of this module to support different workspace structures, and publish as no-code modules to the private registry.
 
 No-code workspace to be placed in a project with varset including:
-- TFE_TOKEN - capable of creating projects and teams
-- GITHUB_TOKEN - capable of creating repos and webhooks
+- TFE_TOKEN - env variable - capable of creating projects and teams
+- GITHUB_TOKEN - env variable - capable of creating repos and webhooks
+- github_owner - terraform variable - github individual or organization
+- tfc_organization - terraform variable - TFC/TFE organization
+- oauth_token_id - terraform variable - oauth token ID of existing VCS connection, used to create the VCS-backed workspaces
 
 <!-- BEGIN_TF_DOCS -->
 
