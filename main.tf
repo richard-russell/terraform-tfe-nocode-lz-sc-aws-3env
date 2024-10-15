@@ -9,7 +9,9 @@ terraform {
 }
 
 provider "github" {}
-provider "tfe" {}
+provider "tfe" {
+  hostname = var.tfe_hostname
+}
 
 locals {
   envs     = [for env in split(",", var.envs) : trimspace(env)]

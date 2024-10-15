@@ -50,6 +50,7 @@ No modules.
 | project\_name | Name of the project to create a landing zone for | `string` | n/a | yes |
 | project\_prefix | Prefix for the TFE project name within the nocode module | `string` | `"nclz-project"` | no |
 | tfc\_organization | TFC organization | `string` | `""` | no |
+| tfe\_hostname | TFE hostname (defaults to HCP Terraform) | `string` | `"app.terraform.io"` | no |
 
 ### Outputs
 
