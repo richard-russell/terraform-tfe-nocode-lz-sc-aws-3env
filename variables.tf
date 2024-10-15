@@ -48,6 +48,12 @@ variable "project_prefix" {
   default     = "nclz-project"
 }
 
+variable "tfe_hostname" {
+  type        = string
+  description = "TFE hostname (defaults to HCP Terraform)"
+  default     = "app.terraform.io"
+}
+
 variable "tfc_organization" {
   type        = string
   description = "TFC organization"
